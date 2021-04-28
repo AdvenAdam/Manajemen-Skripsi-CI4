@@ -19,4 +19,9 @@ class User extends Model
 	protected $dateFormat           = 'date';
 	protected $createdField         = 'created_at';
 	protected $updatedField         = 'updated_at';
+
+	public function getAllUser()
+	{
+		return $this->findAll();
+	}
 }
