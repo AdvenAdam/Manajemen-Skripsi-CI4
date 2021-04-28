@@ -42,6 +42,19 @@ class TblUser extends Migration
 				'constraint' => ['aktif', 'tidak aktif'],
 				'default'	=> 'tidak aktif'
 			],
+			'level' => [
+				'type'		=> 'ENUM',
+				'constraint' => ['member', 'admin'],
+				'default'	=> 'member'
+			],
+			'created_at' =>
+			[
+				'type'	=> 'date'
+			],
+			'updated_at' =>
+			[
+				'type'	=> 'date'
+			]
 		]);
 		$this->forge->addKey('id', true);
 		$this->forge->createTable('tbl_user');

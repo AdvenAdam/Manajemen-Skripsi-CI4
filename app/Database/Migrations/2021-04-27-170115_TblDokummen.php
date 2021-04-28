@@ -14,7 +14,7 @@ class TblDokummen extends Migration
 				'constraint'		=> 10,
 				'auto_increment'	=> true
 			],
-			'pengarang'	=> [
+			'penulis'	=> [
 				'type'		=> 'varchar',
 				'constraint' => 50
 			],
@@ -51,6 +51,14 @@ class TblDokummen extends Migration
 			[
 				'type'		=> 'int',
 				'constraint' => 10
+			],
+			'created_at' =>
+			[
+				'type'	=> 'date'
+			],
+			'updated_at' =>
+			[
+				'type'	=> 'date'
 			]
 		]);
 

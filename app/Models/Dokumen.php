@@ -6,37 +6,29 @@ use CodeIgniter\Model;
 
 class Dokumen extends Model
 {
-	protected $DBGroup              = 'default';
-	protected $table                = 'dokumens';
+	protected $table                = 'tbl_dokumen';
 	protected $primaryKey           = 'id';
 	protected $useAutoIncrement     = true;
-	protected $insertID             = 0;
-	protected $returnType           = 'array';
-	protected $useSoftDelete        = false;
 	protected $protectFields        = true;
-	protected $allowedFields        = [];
+	protected $allowedFields        = [
+		'penulis', 'tahun', 'pembimbing', 'judul',
+		'pendahuluan', 'status_peminjaman', 'id_kategori_dokumen',
+		'id_jenis_penelitian', 'id_bidang'
+	];
 
 	// Dates
-	protected $useTimestamps        = false;
-	protected $dateFormat           = 'datetime';
+	protected $useTimestamps        = true;
+	protected $dateFormat           = 'date';
 	protected $createdField         = 'created_at';
 	protected $updatedField         = 'updated_at';
-	protected $deletedField         = 'deleted_at';
 
-	// Validation
-	protected $validationRules      = [];
-	protected $validationMessages   = [];
-	protected $skipValidation       = false;
-	protected $cleanValidationRules = true;
 
-	// Callbacks
-	protected $allowCallbacks       = true;
-	protected $beforeInsert         = [];
-	protected $afterInsert          = [];
-	protected $beforeUpdate         = [];
-	protected $afterUpdate          = [];
-	protected $beforeFind           = [];
-	protected $afterFind            = [];
-	protected $beforeDelete         = [];
-	protected $afterDelete          = [];
+	public function getDokumen()
+	{
+		return $this
+			->join('tbl_bidang', 'tbl_bidang.id = tbl_dokumen.id_bidang')
+			->join('tbl_jenis_penelitian', 'tbl_jenis_penelitian.id = tbl_dokumen.id_jenis_penelitian')
+			->join('tbl_kategori_dokumen', 'tbl_kategori_dokumen.id = tbl_dokumen.id_kategori_dokumen')
+			->get()->getResultArray();
+	}
 }
