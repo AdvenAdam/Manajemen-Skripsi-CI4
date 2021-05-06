@@ -8,7 +8,7 @@ class Bidang extends Model
 {
 
 	protected $table                = 'tbl_bidang';
-	protected $primaryKey           = 'id';
+	protected $primaryKey           = 'id_bidang';
 	protected $useAutoIncrement     = true;
 	protected $protectFields        = true;
 	protected $allowedFields        = ['bidang'];

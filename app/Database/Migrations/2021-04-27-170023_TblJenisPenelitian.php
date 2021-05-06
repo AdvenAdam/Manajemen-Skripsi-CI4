@@ -9,7 +9,7 @@ class TblJenisPenelitian extends Migration
 	public function up()
 	{
 		$this->forge->addField([
-			'id'	=> [
+			'id_jenis_penelitian'	=> [
 				'type'				=> 'int',
 				'constraint' 		=> 10,
 				'auto_increment'	=> true
@@ -20,7 +20,7 @@ class TblJenisPenelitian extends Migration
 			]
 		]);
 
-		$this->forge->addKey('id', true);
+		$this->forge->addKey('id_jenis_penelitian', true);
 		$this->forge->createTable('tbl_jenis_penelitian');
 	}
 

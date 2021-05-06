@@ -8,7 +8,7 @@ class Kategoridokumen extends Model
 {
 	protected $DBGroup              = 'default';
 	protected $table                = 'tbl_kategori_dokumen';
-	protected $primaryKey           = 'id';
+	protected $primaryKey           = 'id_kategori_dokumen';
 	protected $useAutoIncrement     = true;
 	protected $protectFields        = true;
 	protected $allowedFields        = ['kategori_dokumen'];
@@ -16,5 +16,10 @@ class Kategoridokumen extends Model
 	public function getKategoriDokumen()
 	{
 		return $this->findAll();
+	}
+
+	public function getKategoriById($id)
+	{
+		return $this->find($id);
 	}
 }

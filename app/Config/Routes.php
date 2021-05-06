@@ -34,6 +34,15 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
+$routes->group('Admin', function ($routes) {
+	$routes->get('Dokumen', 'Admin\DokumenController::index');
+	$routes->get('Dokumen/create', 'Admin\DokumenController::create');
+	$routes->post('Dokumen/save', 'Admin\DokumenController::save');
+	$routes->post('Dokumen/update/(:any)', 'Admin\DokumenController::update/$1');
+	$routes->get('Dokumen/delete/(:any)', 'Admin\DokumenController::delete/$1');
+	$routes->get('Dokumen/detail/(:any)', 'Admin\DokumenController::detail/$1');
+	$routes->get('Dokumen/edit/(:any)', 'Admin\DokumenController::edit/$1');
+});
 
 /*
  * --------------------------------------------------------------------

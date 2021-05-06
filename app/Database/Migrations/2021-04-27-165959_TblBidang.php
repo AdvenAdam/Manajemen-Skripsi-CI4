@@ -10,7 +10,7 @@ class TblBidang extends Migration
 	{
 		$this->forge->addField(
 			[
-				'id'	=> [
+				'id_bidang'	=> [
 					'type'			=> 'int',
 					'constraint'	=> 10,
 					'auto_increment' => true
@@ -22,7 +22,7 @@ class TblBidang extends Migration
 			]
 		);
 
-		$this->forge->addKey('id', true);
+		$this->forge->addKey('id_bidang', true);
 		$this->forge->createTable('tbl_bidang');
 	}
 

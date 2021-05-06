@@ -9,7 +9,7 @@ class TblKategoriDokumen extends Migration
 	public function up()
 	{
 		$this->forge->addField([
-			'id'	=> [
+			'id_kategori_dokumen'	=> [
 				'type'				=> 'int',
 				'constraint'		=> 10,
 				'auto_increment'	=> true
@@ -20,7 +20,7 @@ class TblKategoriDokumen extends Migration
 			]
 		]);
 
-		$this->forge->addKey('id', true);
+		$this->forge->addKey('id_kategori_dokumen', true);
 		$this->forge->createTable('tbl_kategori_dokumen');
 	}
 

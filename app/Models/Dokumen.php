@@ -11,9 +11,9 @@ class Dokumen extends Model
 	protected $useAutoIncrement     = true;
 	protected $protectFields        = true;
 	protected $allowedFields        = [
-		'penulis', 'tahun', 'pembimbing', 'judul',
+		'id', 'penulis', 'tahun', 'pembimbing', 'judul',
 		'pendahuluan', 'status_peminjaman', 'id_kategori_dokumen',
-		'id_jenis_penelitian', 'id_bidang'
+		'id_jenis_penelitian', 'id_bidang', 'dokumen',
 	];
 
 	// Dates
@@ -23,12 +23,22 @@ class Dokumen extends Model
 	protected $updatedField         = 'updated_at';
 
 
-	public function getDokumen()
+	public function getDokumen($id = false)
 	{
-		return $this
-			->join('tbl_bidang', 'tbl_bidang.id = tbl_dokumen.id_bidang')
-			->join('tbl_jenis_penelitian', 'tbl_jenis_penelitian.id = tbl_dokumen.id_jenis_penelitian')
-			->join('tbl_kategori_dokumen', 'tbl_kategori_dokumen.id = tbl_dokumen.id_kategori_dokumen')
-			->get()->getResultArray();
+		if ($id == false) {
+			return $this
+				->join('tbl_bidang', 'tbl_dokumen.id_bidang = tbl_bidang.id_bidang')
+				->join('tbl_jenis_penelitian', 'tbl_dokumen.id_jenis_penelitian = tbl_jenis_penelitian.id_jenis_penelitian')
+				->join('tbl_kategori_dokumen', 'tbl_dokumen.id_kategori_dokumen = tbl_kategori_dokumen.id_kategori_dokumen')
+				->orderBy('tbl_dokumen.id')
+				->get()->getResultArray();
+		} else {
+			return $this
+				->join('tbl_bidang', 'tbl_dokumen.id_bidang = tbl_bidang.id_bidang')
+				->join('tbl_jenis_penelitian', 'tbl_dokumen.id_jenis_penelitian = tbl_jenis_penelitian.id_jenis_penelitian')
+				->join('tbl_kategori_dokumen', 'tbl_dokumen.id_kategori_dokumen = tbl_kategori_dokumen.id_kategori_dokumen')
+				->where('tbl_dokumen.id=', $id)
+				->first();
+		}
 	}
 }
