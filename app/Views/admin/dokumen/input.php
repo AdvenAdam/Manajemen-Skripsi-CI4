@@ -124,3 +124,15 @@
 </div>
 
 <?= $this->endSection(); ?>
+<?= $this->Section('source'); ?>
+<!-- tinymce -->
+<script src="/tema/admin/circladmin-10/circl/theme/assets/plugins/tinymce/tinymce.min.js"></script>
+<!-- tinymce WYSWYG -->
+
+<script>
+    tinymce.init({
+        selector: '#pendahuluan',
+
+    });
+</script>
+<?= $this->endSection(); ?>

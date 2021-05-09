@@ -119,7 +119,6 @@ class DokumenController extends BaseController
 		$this->dokumen->save($data);
 		return redirect()->to('/Admin/Dokumen');
 	}
-
 	public function update($id)
 	{
 		// melakukan validasi

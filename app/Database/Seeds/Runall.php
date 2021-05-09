@@ -12,5 +12,6 @@ class Runall extends Seeder
 		$this->call('KategoridokumenSeeder');
 		$this->call('JenispenelitianSeeder');
 		$this->call('UserSeeder');
+		$this->call('Dokumen');
 	}
 }

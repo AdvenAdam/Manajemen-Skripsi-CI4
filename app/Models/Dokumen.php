@@ -41,4 +41,31 @@ class Dokumen extends Model
 				->first();
 		}
 	}
+	public function getDokumenByKategori($id)
+	{
+		return $this
+			->join('tbl_bidang', 'tbl_dokumen.id_bidang = tbl_bidang.id_bidang')
+			->join('tbl_jenis_penelitian', 'tbl_dokumen.id_jenis_penelitian = tbl_jenis_penelitian.id_jenis_penelitian')
+			->join('tbl_kategori_dokumen', 'tbl_dokumen.id_kategori_dokumen = tbl_kategori_dokumen.id_kategori_dokumen')
+			->where('tbl_dokumen.id_kategori_dokumen=', $id)
+			->findAll();
+	}
+	public function getDokumenByBidang($id)
+	{
+		return $this
+			->join('tbl_bidang', 'tbl_dokumen.id_bidang = tbl_bidang.id_bidang')
+			->join('tbl_jenis_penelitian', 'tbl_dokumen.id_jenis_penelitian = tbl_jenis_penelitian.id_jenis_penelitian')
+			->join('tbl_kategori_dokumen', 'tbl_dokumen.id_kategori_dokumen = tbl_kategori_dokumen.id_kategori_dokumen')
+			->where('tbl_dokumen.id_bidang=', $id)
+			->findAll();
+	}
+	public function getDokumenByJenis($id)
+	{
+		return $this
+			->join('tbl_bidang', 'tbl_dokumen.id_bidang = tbl_bidang.id_bidang')
+			->join('tbl_jenis_penelitian', 'tbl_dokumen.id_jenis_penelitian = tbl_jenis_penelitian.id_jenis_penelitian')
+			->join('tbl_kategori_dokumen', 'tbl_dokumen.id_kategori_dokumen = tbl_kategori_dokumen.id_kategori_dokumen')
+			->where('tbl_dokumen.id_jenis_penelitian=', $id)
+			->findAll();
+	}
 }
