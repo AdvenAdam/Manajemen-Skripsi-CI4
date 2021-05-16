@@ -43,8 +43,8 @@ class TblTransaksi extends Migration
 		]);
 
 		$this->forge->addKey('id', true);
-		$this->forge->addForeignKey('id_user', 'tbl_user', 'id', 'cascade', 'restrict');
-		$this->forge->addForeignKey('id_dokumen', 'tbl_dokumen', 'id', 'cascade', 'restrict');
+		$this->forge->addForeignKey('id_user', 'tbl_user', 'id', 'null', 'restrict');
+		$this->forge->addForeignKey('id_dokumen', 'tbl_dokumen', 'id', 'null', 'restrict');
 		$this->forge->createTable('tbl_transaksi');
 	}
 
