@@ -92,7 +92,6 @@ vendor/fakerphp
 vendor/kint-php
 vendor/laminas
 vendor/mikey179
-!vendor/myth
 vendor/myclabs
 vendor/nikic
 vendor/phar-io
