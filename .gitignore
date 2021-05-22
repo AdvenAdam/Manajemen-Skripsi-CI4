@@ -83,8 +83,28 @@ phpunit
 #-------------------------
 # Composer
 #-------------------------
-!vendor/myth-auth
-vendor/
+
+vendor/bin
+vendor/codeigniter4
+vendor/Composer
+vendor/doctrine
+vendor/fakerphp
+vendor/kint-php
+vendor/laminas
+vendor/mikey179
+!vendor/myth
+vendor/myclabs
+vendor/nikic
+vendor/phar-io
+vendor/phpdocumentor
+vendor/phpspec
+vendor/phpunit
+vendor/psr
+vendor/symfony
+vendor/theseer
+vendor/webmozart
+vendor/sebastian
+vendor/autoload.php
 
 #-------------------------
 # IDE / Development Files
