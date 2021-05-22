@@ -2,6 +2,8 @@
 
 namespace Config;
 
+use DeepCopy\Filter\Filter;
+
 // Create a new instance of our RouteCollection class.
 $routes = Services::routes();
 
@@ -16,6 +18,7 @@ if (file_exists(SYSTEMPATH . 'Config/Routes.php')) {
  * Router Setup
  * --------------------------------------------------------------------
  */
+
 $routes->setDefaultNamespace('App\Controllers');
 $routes->setDefaultController('Home');
 $routes->setDefaultMethod('index');
@@ -34,15 +37,30 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
-$routes->group('Admin', function ($routes) {
-	$routes->get('Dokumen', 'Admin\DokumenController::index');
-	$routes->get('Dokumen/create', 'Admin\DokumenController::create');
-	$routes->post('Dokumen/save', 'Admin\DokumenController::save');
-	$routes->post('Dokumen/update/(:any)', 'Admin\DokumenController::update/$1');
-	$routes->get('Dokumen/delete/(:any)', 'Admin\DokumenController::delete/$1');
-	$routes->get('Dokumen/detail/(:any)', 'Admin\DokumenController::detail/$1');
-	$routes->get('Dokumen/edit/(:any)', 'Admin\DokumenController::edit/$1');
+
+$routes->group('Admin', ['filter' => 'role:superadmin,admin'], function ($routes) {
+	$routes->get('/', 'Admin\Dashboard::index');
+
+
+	//user manajemen
+	$routes->group('UserManage',  function ($routes) {
+		$routes->get('/', 'Admin\UserController::index');
+		$routes->get('(:num)', 'Admin\UserController::detail/$1');
+		$routes->post('LevelUp/(:num)', 'Admin\UserController::active/$1');
+		$routes->post('LevelDown/(:num)', 'Admin\UserController::deactive/$1');
+	});
+	//dokumen 
+	$routes->group('Dokumen',  function ($routes) {
+		$routes->match(['get', 'post'], '/', 'Admin\DokumenController::index');
+		$routes->get('create', 'Admin\DokumenController::create');
+		$routes->post('save', 'Admin\DokumenController::save');
+		$routes->post('update/(:any)', 'Admin\DokumenController::update/$1');
+		$routes->get('delete/(:any)', 'Admin\DokumenController::delete/$1');
+		$routes->get('detail/(:any)', 'Admin\DokumenController::detail/$1');
+		$routes->get('edit/(:any)', 'Admin\DokumenController::edit/$1');
+	});
 });
+
 
 /*
  * --------------------------------------------------------------------

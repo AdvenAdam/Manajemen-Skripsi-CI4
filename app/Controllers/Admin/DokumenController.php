@@ -7,6 +7,7 @@ use App\Models\Bidang;
 use App\Models\Jenispenelitian;
 use App\Models\Kategoridokumen;
 use App\Models\Dokumen;
+use CodeIgniter\HTTP\Request;
 
 class DokumenController extends BaseController
 {
@@ -24,9 +25,21 @@ class DokumenController extends BaseController
 
 	public function index()
 	{
+		$jenis = $this->request->getVar('jenis_penelitian');
+		$jurusan = $this->request->getVar('jurusan');
+		$kategori = $this->request->getVar('kategori_dokumen');
 		$data = [
-			'dokumen' => $this->dokumen->getDokumen()
+			'bidang' => $this->bidang->findAll(),
+			'jenis' => $this->jenis->findAll(),
+			'kategori' => $this->kategori->findAll(),
 		];
+
+		if (empty($jurusan) && empty($jenis) && empty($kategori)) {
+			$data['dokumen'] = $this->dokumen->getDokumen();
+		} else {
+			$data['dokumen'] = $this->dokumen->getDokumenByFilter($kategori, $jenis, $jurusan);
+		}
+
 		return view('/admin/dokumen/index', $data);
 	}
 	public function create()
@@ -49,7 +62,6 @@ class DokumenController extends BaseController
 			'dokumen'  => $this->dokumen->getDokumen($id),
 			'validation' =>  \Config\Services::validation(),
 		];
-		// dd($data['dokumen']);
 		return view('/admin/dokumen/edit', $data);
 	}
 	public function setFilename()

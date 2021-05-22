@@ -15,6 +15,54 @@
                                 <a href="" class="btn btn-success"> <i class="fas fa-file-excel"></i> button 1</a>
                                 <a href="" class="btn btn-danger"> <i class="fas fa-file-pdf"></i> button 2</a>
                             </div>
+                            <div class="col">
+                                <div class="accordion accordion-flush" id="accordionFlushExample">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="flush-headingOne">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                                        <a href="" class="btn btn-warning">Filter</a>
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                        </h2>
+                                        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                                            <div class="accordion-body">
+                                                <form class="row row-cols-lg-auto align-items-center" action="/Admin/Dokumen" method="POST">
+                                                    <input type="hidden" name="" id="">
+                                                    <div class="col-5">
+                                                        <label>Pilih Jenis Penelitian</label>
+                                                        <select class="form-select" name="jenis_penelitian">
+                                                            <option value="">Pilih</option>
+                                                            <?php foreach ($jenis as $list) { ?>
+                                                                <option value="<?= $list['id_jenis_penelitian']; ?>"><?= $list['jenis_penelitian']; ?></option>
+                                                            <?php } ?>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="col-5">
+                                                        <label>Pilih Kategori Dokumen</label>
+                                                        <select class="form-select" name="kategori_dokumen">
+                                                            <option value="">Pilih</option>
+                                                            <?php foreach ($kategori as $list) { ?>
+                                                                <option value="<?= $list['id_kategori_dokumen']; ?>"><?= $list['kategori_dokumen']; ?></option>
+                                                            <?php } ?>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-4 pt-4">
+                                                        <button type="submit" class="btn btn-success">Cari Filter</button>
+                                                        <a href="/Admin/Dokumen" class="btn btn-danger">Reset Filter</a>
+                                                    </div>
+                                                </form>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <table id="example" class="display table-hover table invoice-table" style=" width:100%">
@@ -74,3 +122,25 @@
 </div>
 
 <?= $this->endSection(); ?>
+<!-- <?= $this->section('source'); ?>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#bidang').change(function() {
+            var bidang = $("#bidang").val();
+            $.ajax({
+                url: "<?php echo site_url('DokumenController/getFilter'); ?>",
+                method: "POST",
+                data: {
+                    bidang: bidang
+                },
+                async: true,
+                dataType: 'json',
+                success: function(data) {
+                    $dokumen = $data;
+                }
+            });
+            return false;
+        });
+    });
+</script>
+<?= $this->endSection(); ?> -->

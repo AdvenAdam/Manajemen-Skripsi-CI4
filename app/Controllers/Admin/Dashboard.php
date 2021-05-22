@@ -14,8 +14,11 @@ class Dashboard extends BaseController
 	protected $jenis;
 	protected $kategori;
 	protected $dokumen;
+	protected $db, $builder;
 	function __construct()
 	{
+		$this->db		= \Config\Database::connect();
+		$this->builder = $this->db->table('users');
 		$this->bidang = new Bidang();
 		$this->jenis = new Jenispenelitian();
 		$this->kategori = new Kategoridokumen();
@@ -23,50 +26,72 @@ class Dashboard extends BaseController
 	}
 	public function index()
 	{
+		// $user = new \Myth\Auth\Models\UserModel();
+		// 'users' => $user->findAll(),
+
 		$data = [
 			'kategori' => $this->kategori(),
 			'bidang' => $this->bidang(),
 			'jenis' => $this->jenis(),
 			'jml_dokumen' => count($this->dokumen->findAll())
 		];
-
+		//menggunakan session
+		//user()->user_image;
 		return view('/admin/dashboard', $data);
 	}
+	public function detail($id = 0)
+	{
+		$this->builder->select('users.id as userid, username, email, name, ');
+		$this->builder->join('auth_groups_users', 'auth_groups_users.user_id = users.id');
+		$this->builder->join('auth_groups', 'auth_groups.id = auth_groups_users.group_id');
+		$this->builder->where('users.id', $id);
+		$query	 = $this->builder->get();
+		$data = [
+			'users' => $query->getRow(),
+		];
+		if (empty($data['users'])) {
+			return view('/admin/dashboard', $data);
+		}
+		return view('/admin/dashboard', $data);
+	}
+
+
+
 	public function kategori()
 	{
 		$kategori = $this->kategori->findAll();
-		$newKategori = array();
+		$newArray = array();
 		foreach ($kategori as $key => $value) {
-			$newKategori[$key] = [
+			$newArray[$key] = [
 				'kategori' => $value['kategori_dokumen'],
 				'jumlah' => count($this->dokumen->getDokumenByKategori($value['id_kategori_dokumen'])),
 			];
 		}
 
-		return $newKategori;
+		return $newArray;
 	}
 	public function bidang()
 	{
 		$bidang = $this->bidang->findAll();
-		$newKategori = array();
+		$newArray = array();
 		foreach ($bidang as $key => $value) {
-			$newKategori[$key] = [
+			$newArray[$key] = [
 				'bidang' => $value['bidang'],
 				'jumlah' => count($this->dokumen->getDokumenByBidang($value['id_bidang'])),
 			];
 		}
-		return $newKategori;
+		return $newArray;
 	}
 	public function jenis()
 	{
 		$jenis = $this->jenis->findAll();
-		$newKategori = array();
+		$newArray = array();
 		foreach ($jenis as $key => $value) {
-			$newKategori[$key] = [
+			$newArray[$key] = [
 				'jenis' 	=> $value['jenis_penelitian'],
 				'jumlah' 	=> count($this->dokumen->getDokumenByJenis($value['id_jenis_penelitian'])),
 			];
 		}
-		return $newKategori;
+		return $newArray;
 	}
 }

@@ -69,9 +69,9 @@ class TblDokummen extends Migration
 		]);
 
 		$this->forge->addKey('id', true);
-		$this->forge->addForeignKey('id_kategori_dokumen', 'tbl_kategori_dokumen', 'id_kategori_dokumen', 'cascade', 'restrict');
-		$this->forge->addForeignKey('id_jenis_penelitian', 'tbl_jenis_penelitian', 'id_jenis_penelitian', 'cascade', 'restrict');
-		$this->forge->addForeignKey('id_bidang', 'tbl_bidang', 'id_bidang', 'cascade', 'restrict');
+		$this->forge->addForeignKey('id_kategori_dokumen', 'tbl_kategori_dokumen', 'id_kategori_dokumen', 'cascade', 'no action');
+		$this->forge->addForeignKey('id_jenis_penelitian', 'tbl_jenis_penelitian', 'id_jenis_penelitian', 'cascade', 'no action');
+		$this->forge->addForeignKey('id_bidang', 'tbl_bidang', 'id_bidang', 'cascade', 'no action');
 		$this->forge->createTable('tbl_dokumen');
 	}
 

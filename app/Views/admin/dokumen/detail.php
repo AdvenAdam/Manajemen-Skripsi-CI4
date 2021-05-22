@@ -68,7 +68,7 @@
                         <div class="row invoice-details">
                             <h2>Pdf</h2>
                             <div class="col-12">
-                                <embed type="application/pdf" src="/dokumen/<?= $dokumen['kategori_dokumen']; ?>/<?= $dokumen['dokumen']; ?>" width="90%" height="750"></embed>
+                                <embed type="application/pdf" src="/dokumen/<?= $dokumen['kategori_dokumen']; ?>/<?= $dokumen['dokumen']; ?>#toolbar=0" width="100%" height="750"></embed>
                             </div>
                         </div>
                     </div>
@@ -77,4 +77,9 @@
         </div>
     </div>
 </div>
+<?= $this->endSection(); ?>
+<?= $this->Section('source'); ?>
+<script>
+
+</script>
 <?= $this->endSection(); ?>

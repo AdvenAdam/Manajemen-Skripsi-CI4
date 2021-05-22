@@ -9,6 +9,10 @@ class Home extends BaseController
 {
 	public function index()
 	{
-		return view('/admin/layout/content');
+		if (in_groups('admin') || in_groups('superadmin')) {
+			return redirect()->to('/Admin');
+		} else if (in_groups('member')) {
+			return redirect()->to('User');
+		}
 	}
 }

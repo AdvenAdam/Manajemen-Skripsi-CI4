@@ -46,32 +46,57 @@
                         </div>
                         <div class="authent-text">
                             <p>Welcome to IO!</p>
-                            <p>Please Sign-in to your account.</p>
+                            <h2 class="card-header"><?= lang('Auth.loginTitle') ?></h2>
                         </div>
-
-                        <form>
+                        <?= view('Myth\Auth\Views\_message_block') ?>
+                        <form action="<?= route_to('login') ?>" method="post">
+                            <?= csrf_field() ?>
+                            <?php if ($config->validFields === ['email']) : ?>
+                                <div class="mb-3">
+                                    <div class="form-floating">
+                                        <input type="email" class="form-control <?php if (session('errors.login')) : ?>is-invalid<?php endif ?>" name="login" placeholder="<?= lang('Auth.email') ?>">
+                                        <label><?= lang('Auth.email') ?></label>
+                                    </div>
+                                </div>
+                            <?php else : ?>
+                                <div class="mb-3">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control <?php if (session('errors.login')) : ?>is-invalid<?php endif ?>" name="login" placeholder="<?= lang('Auth.emailOrUsername') ?>">
+                                        <label><?= lang('Auth.emailOrUsername') ?></label>
+                                        <div class="invalid-feedback">
+                                            <?= session('errors.login') ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
                             <div class="mb-3">
                                 <div class="form-floating">
-                                    <input type="email" class="form-control" name="email" id="floatingInput" placeholder="name@example.com">
-                                    <label for="floatingInput">Email address</label>
+                                    <input type="password" name="password" class="form-control  <?php if (session('errors.password')) : ?>is-invalid<?php endif ?>" placeholder="<?= lang('Auth.password') ?>">
+                                    <label for="password"><?= lang('Auth.password') ?></label>
+                                    <div class="invalid-feedback">
+                                        <?= session('errors.password') ?>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="mb-3">
-                                <div class="form-floating">
-                                    <input type="password" class="form-control" name="password" id="floatingPassword" placeholder="Password">
-                                    <label for="floatingPassword">Password</label>
+                            <?php if ($config->allowRemembering) : ?>
+                                <div class="mb-3 form-check">
+                                    <label class="form-check-label">
+                                        <input type="checkbox" name="remember" class="form-check-input" <?php if (old('remember')) : ?> checked <?php endif ?>>
+                                        <?= lang('Auth.rememberMe') ?>
+                                    </label>
                                 </div>
-                            </div>
-                            <div class="mb-3 form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                <label class="form-check-label" for="exampleCheck1">Ingat Saya</label>
-                            </div>
+                            <?php endif; ?>
                             <div class="d-grid">
-                                <button type="submit" class="btn btn-info m-b-xs">Sign In</button>
+                                <button type="submit" class="btn btn-info m-b-xs"><?= lang('Auth.loginAction') ?></button>
                             </div>
                         </form>
                         <div class="authent-reg">
-                            <p>Not registered? <a href="register.html">Create an account</a></p>
+                            <?php if ($config->allowRegistration) : ?>
+                                <p>Not registered?<a href="<?= route_to('register') ?>">Create an account</a></p>
+                            <?php endif; ?>
+                            <?php if ($config->activeResetter) : ?>
+                                <p><a href="<?= route_to('forgot') ?>"><?= lang('Auth.forgotYourPassword') ?></a></p>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -82,7 +107,6 @@
 
     <!-- Javascripts -->
     <script src="/tema/admin/circladmin-10/circl/theme/assets/plugins/jquery/jquery-3.4.1.min.js"></script>
-    <script src="/tema/admin/circladmin-10/circl/theme/assets/js/popper.min.js"></script>
     <script src="/tema/admin/circladmin-10/circl/theme/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
     <script src="/tema/admin/circladmin-10/circl/theme/assets/js/feather.min.js"></script>
     <script src="/tema/admin/circladmin-10/circl/theme/assets/plugins/perfectscroll/perfect-scrollbar.min.js"></script>

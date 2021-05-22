@@ -6,12 +6,12 @@ use CodeIgniter\Model;
 
 class User extends Model
 {
-	protected $table                = 'tbl_dokumen';
+	protected $table                = 'users';
 	protected $primaryKey           = 'id';
 	protected $useAutoIncrement     = true;
 	protected $protectFields        = true;
 	protected $allowedFields        = [
-		'nama', 'no_hp', 'alamat', 'email', 'password', 'foto', 'status'
+		'email', 'username', 'user_image', 'active'
 	];
 
 	// Dates

@@ -41,31 +41,40 @@ class Dokumen extends Model
 				->first();
 		}
 	}
-	public function getDokumenByKategori($id)
+
+	public function getDokumenByFilter($kategori = false, $jenis = false, $jurusan = 1)
+	{
+
+		if ($jurusan = false && $jenis = false && $kategori = false) {
+			return $this->getDokumen();
+		} else {
+			return $this
+				->join('tbl_bidang', 'tbl_dokumen.id_bidang = tbl_bidang.id_bidang')
+				->join('tbl_jenis_penelitian', 'tbl_dokumen.id_jenis_penelitian = tbl_jenis_penelitian.id_jenis_penelitian')
+				->join('tbl_kategori_dokumen', 'tbl_dokumen.id_kategori_dokumen = tbl_kategori_dokumen.id_kategori_dokumen')
+				->where('tbl_dokumen.id_bidang=', $jurusan)
+				->orwhere('tbl_dokumen.id_kategori_dokumen=', $kategori)
+				->orwhere('tbl_dokumen.id_jenis_penelitian=', $jenis)
+				->get()->getResultArray();
+		}
+	}
+
+	public function getDokumenByKategori($kategori)
 	{
 		return $this
-			->join('tbl_bidang', 'tbl_dokumen.id_bidang = tbl_bidang.id_bidang')
-			->join('tbl_jenis_penelitian', 'tbl_dokumen.id_jenis_penelitian = tbl_jenis_penelitian.id_jenis_penelitian')
-			->join('tbl_kategori_dokumen', 'tbl_dokumen.id_kategori_dokumen = tbl_kategori_dokumen.id_kategori_dokumen')
-			->where('tbl_dokumen.id_kategori_dokumen=', $id)
+			->where('tbl_dokumen.id_kategori_dokumen=', $kategori)
 			->findAll();
 	}
-	public function getDokumenByBidang($id)
+	public function getDokumenByBidang($bidang)
 	{
 		return $this
-			->join('tbl_bidang', 'tbl_dokumen.id_bidang = tbl_bidang.id_bidang')
-			->join('tbl_jenis_penelitian', 'tbl_dokumen.id_jenis_penelitian = tbl_jenis_penelitian.id_jenis_penelitian')
-			->join('tbl_kategori_dokumen', 'tbl_dokumen.id_kategori_dokumen = tbl_kategori_dokumen.id_kategori_dokumen')
-			->where('tbl_dokumen.id_bidang=', $id)
+			->where('tbl_dokumen.id_bidang=', $bidang)
 			->findAll();
 	}
-	public function getDokumenByJenis($id)
+	public function getDokumenByJenis($jenis)
 	{
 		return $this
-			->join('tbl_bidang', 'tbl_dokumen.id_bidang = tbl_bidang.id_bidang')
-			->join('tbl_jenis_penelitian', 'tbl_dokumen.id_jenis_penelitian = tbl_jenis_penelitian.id_jenis_penelitian')
-			->join('tbl_kategori_dokumen', 'tbl_dokumen.id_kategori_dokumen = tbl_kategori_dokumen.id_kategori_dokumen')
-			->where('tbl_dokumen.id_jenis_penelitian=', $id)
+			->where('tbl_dokumen.id_jenis_penelitian=', $jenis)
 			->findAll();
 	}
 }
