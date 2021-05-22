@@ -89,7 +89,7 @@ phpunit
 
 ! vendor/
 **/vendor/*
-!**/vendor/myth
+!**/vendor/myth/
 #-------------------------
 # IDE / Development Files
 #-------------------------
