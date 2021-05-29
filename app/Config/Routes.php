@@ -38,12 +38,11 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 
+
 $routes->group('Admin', ['filter' => 'role:superadmin,admin'], function ($routes) {
 	$routes->get('/', 'Admin\Dashboard::index');
-
-
 	//user manajemen
-	$routes->group('UserManage',  function ($routes) {
+	$routes->group('UserManage', ['filter' => 'role:superadmin'], function ($routes) {
 		$routes->get('/', 'Admin\UserController::index');
 		$routes->get('(:num)', 'Admin\UserController::detail/$1');
 		$routes->post('LevelUp/(:num)', 'Admin\UserController::active/$1');

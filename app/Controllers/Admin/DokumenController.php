@@ -140,8 +140,8 @@ class DokumenController extends BaseController
 		// mndapatkan data file lama berdasarkan id
 		$dataLama = $this->dokumen->getDokumen($id);
 		$namaDokumenLama = $dataLama['dokumen'];
-		$DokumenLama = ('dokumen/' . $dataLama['kategori_dokumen'] . '/' . $dataLama['dokumen']);
-		$lokasi = (ROOTPATH . 'dokumen/' . $dataLama['kategori_dokumen'] . '/' . $dataLama['dokumen']);
+		$DokumenLama = ('dokumen/' . $dataLama['kategori_dokumen'] . '/' . $namaDokumenLama);
+		$lokasi = (ROOTPATH . 'dokumen/' . $dataLama['kategori_dokumen'] . '/' . $namaDokumenLama);
 		$extension = pathinfo($lokasi, PATHINFO_EXTENSION);
 
 		// mendapatkan file dari input type file 

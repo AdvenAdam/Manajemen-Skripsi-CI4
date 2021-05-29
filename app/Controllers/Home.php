@@ -14,5 +14,7 @@ class Home extends BaseController
 		} else if (in_groups('member')) {
 			return redirect()->to('User');
 		}
+
+		return view('member/Home/Home');
 	}
 }
