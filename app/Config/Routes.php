@@ -38,6 +38,12 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 
+// $routes->get('/Transaksi', 'TransaksiController::index');
+//user manajemen
+$routes->group('Transaksi', function ($routes) {
+	$routes->post('Pinjam/(:num)', 'TransaksiController::pinjam/$1');
+});
+
 
 $routes->group('Admin', ['filter' => 'role:superadmin,admin'], function ($routes) {
 	$routes->get('/', 'Admin\Dashboard::index');
@@ -47,6 +53,13 @@ $routes->group('Admin', ['filter' => 'role:superadmin,admin'], function ($routes
 		$routes->get('(:num)', 'Admin\UserController::detail/$1');
 		$routes->post('LevelUp/(:num)', 'Admin\UserController::active/$1');
 		$routes->post('LevelDown/(:num)', 'Admin\UserController::deactive/$1');
+	});
+
+	$routes->group('Transaksi', function ($routes) {
+		$routes->get('/', 'TransaksiController::index');
+		$routes->post('DeleteBatch', 'TransaksiController::deleteBatch');
+		$routes->post('Acc/(:num)', 'TransaksiController::AccPinjam/$1');
+		$routes->post('Terima/(:num)', 'TransaksiController::AccKembali/$1');
 	});
 	//dokumen 
 	$routes->group('Dokumen',  function ($routes) {

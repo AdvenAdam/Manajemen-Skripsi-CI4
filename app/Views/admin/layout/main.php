@@ -82,7 +82,6 @@
     <script>
         $(document).ready(function() {
             $('#example').DataTable({
-                "scrollX": true,
                 "oLanguage": {
                     "sSearch": "",
                     "sSearchPlaceholder": "Cari",

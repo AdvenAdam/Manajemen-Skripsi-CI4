@@ -35,7 +35,7 @@ class Dashboard extends BaseController
 			'jenis' => $this->jenis(),
 			'jml_dokumen' => count($this->dokumen->findAll())
 		];
-		//menggunakan session
+		//mendapatkan data login dalam session
 		//user()->user_image;
 		return view('/admin/dashboard', $data);
 	}

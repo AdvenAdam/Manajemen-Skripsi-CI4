@@ -75,6 +75,7 @@
                                     <th>Penelitian</th>
                                     <th>Bidang</th>
                                     <th>#</th>
+                                    <th>#</th>
                                 </tr>
                             </thead>
                             <?php $i = 1; ?>
@@ -87,6 +88,12 @@
                                         <td><?= $list['kategori_dokumen']; ?></td>
                                         <td><?= $list['jenis_penelitian']; ?></td>
                                         <td><?= $list['bidang']; ?></td>
+                                        <td>
+                                            <form action="/Transaksi/Pinjam/<?= $list['id']; ?>" method="post">
+                                                <?= csrf_field(); ?>
+                                                <button class="btn btn-success">Pinjam</button>
+                                            </form>
+                                        </td>
                                         <td>
                                             <a href="Dokumen/edit/<?= $list['id']; ?>" title="Edit"><i data-feather="edit"></i> </a>
                                             <a href="Dokumen/detail/<?= $list['id']; ?>" title="Lihat"><i data-feather="eye"></i> </a>
@@ -123,24 +130,5 @@
 
 <?= $this->endSection(); ?>
 <!-- <?= $this->section('source'); ?>
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#bidang').change(function() {
-            var bidang = $("#bidang").val();
-            $.ajax({
-                url: "<?php echo site_url('DokumenController/getFilter'); ?>",
-                method: "POST",
-                data: {
-                    bidang: bidang
-                },
-                async: true,
-                dataType: 'json',
-                success: function(data) {
-                    $dokumen = $data;
-                }
-            });
-            return false;
-        });
-    });
-</script>
+
 <?= $this->endSection(); ?> -->
