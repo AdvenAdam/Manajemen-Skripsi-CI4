@@ -12,7 +12,7 @@
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="single-team mt-30">
                     <div class="team-thumb">
-                        <img src="image/foto/default.jpg" alt="">
+                        <img src="image/foto/adam.png" alt="">
                     </div>
                     <div class="team-content text-center">
                         <h5 class="title">Adven Adam K</h5>
