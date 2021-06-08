@@ -48,6 +48,11 @@
                             <p>Welcome to IO!</p>
                             <h2 class="card-header"><?= lang('Auth.loginTitle') ?></h2>
                         </div>
+                        <?php if (session()->getFlashdata('danger')) { ?>
+                            <div class="alert alert-danger fade show" role="alert">
+                                <span><?= session()->getFlashdata('danger'); ?></span>
+                            </div>
+                        <?php } ?>
                         <?= view('Myth\Auth\Views\_message_block') ?>
                         <form action="<?= route_to('login') ?>" method="post">
                             <?= csrf_field() ?>

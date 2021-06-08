@@ -42,7 +42,7 @@
                         <div class="row invoice-details">
                             <h2>Image</h2>
                             <div class="col-12">
-                                <img src="/image/<?= $users->user_image; ?>" alt="">
+                                <img src="/image/foto/<?= $users->user_image; ?>" alt="">
                             </div>
                         </div>
                     </div>

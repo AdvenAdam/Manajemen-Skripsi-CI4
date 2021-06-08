@@ -48,7 +48,7 @@
                                                 <span class="badge rounded-pill bg-dark">member</span>
                                             <?php } ?>
                                         </td>
-                                        <td> <a href="/Admin/UserManage/<?= $list->userid; ?>" title="Lihat"> <i data-feather="eye"></i></a>
+                                        <td>
                                             <?php if ($list->name == 'admin') { ?>
                                                 <form action="/Admin/UserManage/LevelDown/<?= $list->userid; ?>" method="POST" class="d-inline">
                                                     <?php csrf_field() ?>

@@ -9,7 +9,6 @@
                         <h3 class="Card-title mb-4">Data Transaksi Tersimpan</h3>
                         <div class="row mb-4">
                             <div class="col-6">
-
                             </div>
                             <div class="col-6" align="right">
                                 <a href="" data-bs-toggle="modal" data-bs-target="#confirmHapus" class="btn btn-danger">Hapus Transaksi yang Sudah Selesai</a>
@@ -18,7 +17,6 @@
                         <table id="example" class="display table-hover table invoice-table" style=" width:100%">
                             <thead>
                                 <tr>
-
                                     <th>Peminjam</th>
                                     <th>Judul</th>
                                     <th>Pinjam</th>

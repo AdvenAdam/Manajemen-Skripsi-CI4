@@ -24,6 +24,8 @@ class UserController extends BaseController
 		$this->builder->where('name!=', 'superadmin')->orderBy('userid', 'ASC');
 		$query	 = $this->builder->get();
 		$data = [
+			'title'	=> 'User Manajemen',
+			'active' => 'user',
 			'users' => $query->getResult(),
 		];
 		return view('/admin/usermanage/index', $data);
@@ -37,6 +39,8 @@ class UserController extends BaseController
 		$this->builder->where('users.id', $id);
 		$query	 = $this->builder->get();
 		$data = [
+			'title'	=> 'User Manajemen',
+			'active' => 'user',
 			'users' => $query->getRow(),
 		];
 		if (empty($data['users'])) {

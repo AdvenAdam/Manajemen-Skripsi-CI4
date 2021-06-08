@@ -11,7 +11,7 @@
     <!-- The above 6 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
     <!-- Title -->
-    <title>Circl - Responsive Admin Dashboard Template</title>
+    <title><?= $title; ?></title>
 
     <!-- Styles -->
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,700,800&display=swap" rel="stylesheet">
@@ -67,6 +67,7 @@
     <script src="/tema/admin/circladmin-10/circl/theme/assets/js/main.min.js"></script>
     <!-- pages -->
     <script src="/tema/admin/circladmin-10/circl/theme/assets/js/pages/datatables.js"></script>
+    <!-- <script src="/tema/admin/circladmin-10/circl/theme/assets/js/pages/charts.js"></script> -->
 
     <?= $this->renderSection('source'); ?>
     <!-- fungsi date picker format tahun -->

@@ -32,6 +32,9 @@ class DokumenController extends BaseController
 			'bidang' => $this->bidang->findAll(),
 			'jenis' => $this->jenis->findAll(),
 			'kategori' => $this->kategori->findAll(),
+			'title'		=> 'Manajemen Dokumen',
+			'active'	=> 'dokumen',
+
 		];
 
 		if (empty($jurusan) && empty($jenis) && empty($kategori)) {

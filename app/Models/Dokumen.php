@@ -42,9 +42,8 @@ class Dokumen extends Model
 		}
 	}
 
-	public function getDokumenByFilter($kategori = false, $jenis = false, $jurusan = 1)
+	public function getDokumenByFilter($kategori = false, $jenis = false, $jurusan = false)
 	{
-
 		if ($jurusan = false && $jenis = false && $kategori = false) {
 			return $this->getDokumen();
 		} else {
@@ -59,19 +58,19 @@ class Dokumen extends Model
 		}
 	}
 
-	public function getDokumenByKategori($kategori)
+	public function getByKategori($kategori)
 	{
 		return $this
 			->where('tbl_dokumen.id_kategori_dokumen=', $kategori)
 			->findAll();
 	}
-	public function getDokumenByBidang($bidang)
+	public function getByBidang($bidang)
 	{
 		return $this
 			->where('tbl_dokumen.id_bidang=', $bidang)
 			->findAll();
 	}
-	public function getDokumenByJenis($jenis)
+	public function getByJenis($jenis)
 	{
 		return $this
 			->where('tbl_dokumen.id_jenis_penelitian=', $jenis)

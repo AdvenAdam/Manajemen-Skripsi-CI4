@@ -35,13 +35,20 @@ class Transaksi extends Model
 		}
 	}
 
-	public function cekJmlTrx($id)
+	public function cekJmlTrx($id = false)
 	{
-		return $this
-			->select('id_user')
-			->where('status!=', 4)
-			->where('id_user=', $id)
-			->countAllResults();
+		if ($id != false) {
+			return $this
+				->select('id_user')
+				->where('status!=', 4)
+				->where('id_user=', $id)
+				->countAllResults();
+		} else {
+			return $this
+				->select('id_user')
+				->where('status!=', 4)
+				->countAllResults();
+		}
 	}
 
 	public function deleteBatch()
@@ -57,6 +64,37 @@ class Transaksi extends Model
 			->join('users', 'users.id=tbl_transaksi.id_user')
 			->join('tbl_dokumen', 'tbl_dokumen.id=tbl_transaksi.id_dokumen')
 			->where('tbl_transaksi.id_user=', $id)
+			->get()->getResultArray();
+	}
+
+	public function getData($periode)
+	{
+		if ($periode == 'Bulanan') {
+
+			return $this
+				->select("count(id) as jml_trx,concat(MONTHNAME(created_at),' - ', year(created_at) ) As created_at")
+				->groupBy(' year(created_at), month(created_at)')
+				->get()->getResultArray();
+		} elseif ($periode == 'Tahunan') {
+			return $this
+				->select("count(id) as jml_trx, year(created_at) as created_at")
+				->groupBy(' year(created_at)')
+				->get()->getResultArray();
+		} elseif ($periode == 'Harian') {
+			return $this
+				->select("count(id) as jml_trx,created_at")
+				->groupBy('created_at')
+				->get()->getResultArray();
+		}
+	}
+
+	public function getDataKeranjang($user)
+	{
+		return $this
+			->select('tbl_transaksi.id as id_trx,id_user,id_dokumen,username,tbl_transaksi.status,judul,denda,tanggal_pinjam,tanggal_kembali')
+			->join('users', 'users.id=tbl_transaksi.id_user')
+			->join('tbl_dokumen', 'tbl_dokumen.id=tbl_transaksi.id_dokumen')
+			->where('tbl_transaksi.id_user=', $user)
 			->get()->getResultArray();
 	}
 }

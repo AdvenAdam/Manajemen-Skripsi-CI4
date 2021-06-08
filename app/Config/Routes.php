@@ -37,16 +37,23 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
+$routes->get('/DataJudul', 'Home::dataJudul');
+$routes->get('/detailDokumen/(:any)', 'Home::detail/$1');
 
 // $routes->get('/Transaksi', 'TransaksiController::index');
 //user manajemen
-$routes->group('Transaksi', function ($routes) {
-	$routes->post('Pinjam/(:num)', 'TransaksiController::pinjam/$1');
+$routes->group('Transaksi', ['filter' => 'role:member'], function ($routes) {
+	$routes->post('Pinjam/(:num)', 'Member\TransaksiController::pinjam/$1');
+	$routes->post('Kembali/(:num)', 'Member\TransaksiController::kembali/$1');
+});
+$routes->group('Keranjang', ['filter' => 'role:member'], function ($routes) {
+	$routes->get('/', 'Member\KeranjangController::index');
 });
 
 
 $routes->group('Admin', ['filter' => 'role:superadmin,admin'], function ($routes) {
 	$routes->get('/', 'Admin\Dashboard::index');
+	$routes->post('/', 'Admin\Dashboard::index');
 	//user manajemen
 	$routes->group('UserManage', ['filter' => 'role:superadmin'], function ($routes) {
 		$routes->get('/', 'Admin\UserController::index');
@@ -55,7 +62,7 @@ $routes->group('Admin', ['filter' => 'role:superadmin,admin'], function ($routes
 		$routes->post('LevelDown/(:num)', 'Admin\UserController::deactive/$1');
 	});
 
-	$routes->group('Transaksi', function ($routes) {
+	$routes->group('Transaksi', ["namespace" => "App\Controllers\Admin"], function ($routes) {
 		$routes->get('/', 'TransaksiController::index');
 		$routes->post('DeleteBatch', 'TransaksiController::deleteBatch');
 		$routes->post('Acc/(:num)', 'TransaksiController::AccPinjam/$1');

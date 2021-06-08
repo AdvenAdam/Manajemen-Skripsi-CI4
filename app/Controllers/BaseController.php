@@ -30,7 +30,7 @@ class BaseController extends Controller
 	/**
 	 * @var array
 	 */
-	protected $helpers = ['auth'];
+	protected $helpers = ['auth', 'tanggal_helper'];
 
 	/**
 	 * Constructor.
