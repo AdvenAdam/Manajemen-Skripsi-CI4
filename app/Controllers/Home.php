@@ -31,7 +31,7 @@ class Home extends BaseController
 				'bidang' 		=> $this->bidang(),
 				'jenis' 		=> $this->jenis(),
 				'slider'		=> $this->dataSlider(),
-				'title'			=> 'title'
+				'title'			=> 'SIDAKI'
 			];
 			$this->hitungPengunjung();
 			return view('user/Home/Home', $data);
@@ -41,7 +41,7 @@ class Home extends BaseController
 			'bidang' 		=> $this->bidang(),
 			'jenis' 		=> $this->jenis(),
 			'slider'		=> $this->dataSlider(),
-			'title'			=> 'title'
+			'title'			=> 'SIDAKI'
 		];
 		$this->hitungPengunjung();
 		return view('user/Home/Home', $data);

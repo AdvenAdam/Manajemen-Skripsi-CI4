@@ -8,6 +8,8 @@ use App\Models\Jenispenelitian;
 use App\Models\Kategoridokumen;
 use App\Models\Dokumen;
 use CodeIgniter\HTTP\Request;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class DokumenController extends BaseController
 {
@@ -209,5 +211,47 @@ class DokumenController extends BaseController
 		$this->dokumen->delete($dokumen['id']);
 		session()->setFlashdata('success', 'Data Berhasil Dihapus');
 		return redirect()->to('/Admin/Dokumen');
+	}
+
+	public function lapExcel()
+	{
+		$spreadsheet = new Spreadsheet;
+		$sheet = $spreadsheet->getActiveSheet();
+		$sheet->setCellValue('A1', 'No');
+		$sheet->setCellValue('B1', 'Penulis');
+		$sheet->setCellValue('C1', 'Tahun');
+		$sheet->setCellValue('D1', 'Pembimbing');
+		$sheet->setCellValue('E1', 'Judul');
+		$sheet->setCellValue('F1', 'Status');
+		$sheet->setCellValue('G1', 'Kategori');
+		$sheet->setCellValue('H1', 'Jenis Penelitian');
+		$sheet->setCellValue('I1', 'Bidang');
+		$sheet->setCellValue('J1', 'di Unggah');
+		$sheet->setCellValue('K1', 'di Ubah');
+
+		$dokumen = $this->dokumen->getDokumen();
+		$no = 1;
+		$x = 2;
+		foreach ($dokumen as $val) :
+			$sheet->setCellValue('A' . $x, $no++);
+			$sheet->setCellValue('B' . $x, $val['penulis']);
+			$sheet->setCellValue('C' . $x, $val['tahun']);
+			$sheet->setCellValue('D' . $x, $val['pembimbing']);
+			$sheet->setCellValue('E' . $x, $val['judul']);
+			$sheet->setCellValue('F' . $x, $val['status_peminjaman']);
+			$sheet->setCellValue('G' . $x, $val['kategori_dokumen']);
+			$sheet->setCellValue('H' . $x, $val['jenis_penelitian']);
+			$sheet->setCellValue('I' . $x, $val['bidang']);
+			$sheet->setCellValue('J' . $x, $val['created_at']);
+			$sheet->setCellValue('J' . $x, $val['updated_at']);
+			$x++;
+		endforeach;
+		$writer = new xlsx($spreadsheet);
+		$filename = 'laporan-data-dokumen';
+		header('Content-Type: application/vnd.ms-excel');
+		header('Content-Disposition: attachment;filename="' . $filename . '.xlsx"');
+		header('Cache-Control: max-age=0');
+
+		$writer->save('php://output');
 	}
 }

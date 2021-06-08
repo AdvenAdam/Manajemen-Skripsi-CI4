@@ -8,9 +8,10 @@
                     <div class="card-body">
                         <h3 class="Card-title mb-4">Data Transaksi Tersimpan</h3>
                         <div class="row mb-4">
-                            <div class="col-6">
+                            <div class="col-4">
                             </div>
-                            <div class="col-6" align="right">
+                            <div class="col-8" align="right">
+                                <a href="Transaksi/lapExcel" class="btn btn-success"> <i class="fas fa-file-excel"></i> Cetak Laporan</a>
                                 <a href="" data-bs-toggle="modal" data-bs-target="#confirmHapus" class="btn btn-danger">Hapus Transaksi yang Sudah Selesai</a>
                             </div>
                         </div>
@@ -29,7 +30,6 @@
                             <tbody>
                                 <?php foreach ($transaksi as $list) { ?>
                                     <tr>
-
                                         <td><?= $list['username']; ?></td>
                                         <td><?= $list['judul']; ?></td>
                                         <td><?= $list['tanggal_pinjam']; ?></td>

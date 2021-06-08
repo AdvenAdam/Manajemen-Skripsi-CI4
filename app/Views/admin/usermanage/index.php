@@ -11,10 +11,7 @@
                             <div class="col-6">
                                 <a href="Dokumen/create" class="btn btn-primary">Tambah Data</a>
                             </div>
-                            <div class="col-6" align="right">
-                                <a href="" class="btn btn-success"> <i class="fas fa-file-excel"></i> button 1</a>
-                                <a href="" class="btn btn-danger"> <i class="fas fa-file-pdf"></i> button 2</a>
-                            </div>
+
                         </div>
                         <table id="example" class="display table-hover table invoice-table" style=" width:100%">
                             <thead>

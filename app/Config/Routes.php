@@ -66,6 +66,7 @@ $routes->group('Admin', ['filter' => 'role:superadmin,admin'], function ($routes
 		$routes->get('/', 'TransaksiController::index');
 		$routes->post('DeleteBatch', 'TransaksiController::deleteBatch');
 		$routes->post('Acc/(:num)', 'TransaksiController::AccPinjam/$1');
+		$routes->get('lapExcel', 'TransaksiController::lapExcel');
 		$routes->post('Terima/(:num)', 'TransaksiController::AccKembali/$1');
 	});
 	//dokumen 
@@ -75,6 +76,7 @@ $routes->group('Admin', ['filter' => 'role:superadmin,admin'], function ($routes
 		$routes->post('save', 'Admin\DokumenController::save');
 		$routes->post('update/(:any)', 'Admin\DokumenController::update/$1');
 		$routes->get('delete/(:any)', 'Admin\DokumenController::delete/$1');
+		$routes->get('lapExcel', 'Admin\DokumenController::lapExcel');
 		$routes->get('detail/(:any)', 'Admin\DokumenController::detail/$1');
 		$routes->get('edit/(:any)', 'Admin\DokumenController::edit/$1');
 	});

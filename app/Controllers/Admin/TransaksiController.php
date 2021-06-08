@@ -6,6 +6,8 @@ use App\Controllers\BaseController;
 use App\Models\Transaksi;
 use App\Models\Dokumen;
 use DateTime;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class TransaksiController extends BaseController
 {
@@ -27,32 +29,6 @@ class TransaksiController extends BaseController
 		return view('/Admin/transaksi/index', $data);
 	}
 
-	public function pinjam($id)
-	{
-		// pengecekan maksimal trx user di tbl transaksi
-		$jumlah_trx = $this->transaksi->cekJmlTrx(user()->id);
-		if ($jumlah_trx < 2) {
-			//mengubah status di dokumen menjadi diproses
-			$this->dokumen->save([
-				'id' => $id,
-				'status_peminjaman' => 'diproses',
-			]);
-
-			$this->transaksi->save([
-				'id_dokumen'		=> $id,
-				'id_user'			=> user()->id,
-				'status'			=> '1'
-
-			]);
-
-			session()->setFlashdata('success', 'Peminjaman Berhasil Diproses, Silahkan Hubungi Admin Untuk Validasi Peminjaman');
-		} else {
-			session()->setFlashdata('danger', 'Anda Tidak Boleh Meminjam Dokumen Lebih Dari 2');
-			return redirect()->to('/');
-		}
-		return redirect()->to('/Admin/Dokumen');
-	}
-
 	// bagian inii cek lagi logikanya menghindari load data tdk efektif
 
 	//id adalah id transaksi
@@ -69,20 +45,6 @@ class TransaksiController extends BaseController
 			'status_peminjaman' => 'tidak tersedia'
 		]);
 		return redirect()->to('/Admin/Transaksi');
-	}
-	//id adalah id transaksi
-	public function kembali($id)
-	{
-		$dataTrx = $this->transaksi->find($id);
-		$this->transaksi->save([
-			'id' 			 => $id,
-			'status'		 => 3
-		]);
-		$this->dokumen->save([
-			'id' 				=> $dataTrx['id_dokumen'],
-			'status_peminjaman' => 'diproses'
-		]);
-		//tempat return2nya wkwkw
 	}
 	//id adalah id transaksi
 	public function AccKembali($id)
@@ -156,5 +118,50 @@ class TransaksiController extends BaseController
 		if ($hapus) {
 			return redirect()->to('/Admin/Transaksi');
 		}
+	}
+
+	public function lapExcel()
+	{
+		$spreadsheet = new Spreadsheet;
+		$sheet = $spreadsheet->getActiveSheet();
+		$sheet->setCellValue('A1', 'No');
+		$sheet->setCellValue('B1', 'Peminjam');
+		$sheet->setCellValue('C1', 'Judul Dokumen');
+		$sheet->setCellValue('D1', 'Status');
+		$sheet->setCellValue('E1', 'Tanggal Pinjam');
+		$sheet->setCellValue('F1', 'Tanggal Kembali');
+		$sheet->setCellValue('G1', 'Denda');
+
+
+		$transaksi = $this->transaksi->getTransaksi();
+		$no = 1;
+		$x = 2;
+		foreach ($transaksi as $val) :
+			$sheet->setCellValue('A' . $x, $no++);
+			$sheet->setCellValue('B' . $x, $val['username']);
+			$sheet->setCellValue('C' . $x, $val['judul']);
+			if ($val['status'] == 1) {
+				$status = 'Menunggu Acc';
+			} else if ($val['status'] == 2) {
+				$status = 'Dipinjam';
+			} else if ($val['status'] == 3) {
+				$status = 'Dikembalikan';
+			} else if ($val['status'] == 4) {
+				$status = 'Selesai';
+			}
+			$sheet->setCellValue('D' . $x, $status);
+			$sheet->setCellValue('E' . $x, $val['tanggal_pinjam']);
+			$sheet->setCellValue('F' . $x, $val['tanggal_kembali']);
+			$sheet->setCellValue('G' . $x, $val['denda']);
+			$x++;
+		endforeach;
+
+		$writer = new xlsx($spreadsheet);
+		$filename = 'laporan-data-transaksi';
+		header('Content-Type: application/vnd.ms-excel');
+		header('Content-Disposition: attachment;filename="' . $filename . '.xlsx"');
+		header('Cache-Control: max-age=0');
+
+		$writer->save('php://output');
 	}
 }
