@@ -13,6 +13,8 @@
     <!-- Title -->
     <title><?= $title; ?></title>
 
+    <!--====== Favicon Icon ======-->
+    <link rel="shortcut icon" href="/tema/user/template/assets/images/logo/fav.jpg" type="image/png">
     <!-- Styles -->
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,700,800&display=swap" rel="stylesheet">
     <link href="/tema/admin/circladmin-10/circl/theme/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -147,6 +149,30 @@
                 fileReader.readAsArrayBuffer(file);
             }
         });
+    </script>
+    <!-- alert fade out -->
+    <script>
+        window.setTimeout(function() {
+            $(".alert").fadeTo(500, 0).slideUp(500, function() {
+                $(this).remove();
+            })
+        }, 3000);
+    </script>
+
+    <!-- imagepreview -->
+    <script>
+        function previewImg() {
+
+            const foto = document.querySelector('#foto');
+            const fotoLabel = document.querySelector('.form-label');
+            const imgPreview = document.querySelector('.img-preview');
+            fotoLabel.textContent = foto.files[0].name;
+            const filefoto = new FileReader();
+            filefoto.readAsDataURL(foto.files[0]);
+            filefoto.onload = function(e) {
+                imgPreview.src = e.target.result;
+            }
+        }
     </script>
 
 </body>

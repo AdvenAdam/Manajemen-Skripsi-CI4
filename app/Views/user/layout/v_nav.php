@@ -58,7 +58,7 @@
                                    <a class="nav-link"><img src="/image/foto/<?= user()->user_image; ?>" style="width: 50px; height: 50px; object-fit: cover; object-position: center;" class="rounded-circle" alt="">
                                    </a>
                                    <ul class="sub-menu">
-                                       <li><a href="/Profil">Profil</a></li>
+                                       <li><a href="/Profile">Profil</a></li>
                                        <li><a href="/Keranjang">Keranjang</a></li>
                                        <li><a href="/logout">Logout</a></li>
                                    </ul> <!-- sub menu -->

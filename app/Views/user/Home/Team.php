@@ -1,4 +1,4 @@
-<div class="team-area gray-bg pt-115">
+<div class="team-area gray-bg pt-115" id='tentang'>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8">
@@ -23,7 +23,7 @@
             <div class="col-lg-6 offset-lg-1 wow fadeInRight" data-wow-duration="1.5s" data-wow-delay="0s">
                 <div class="section-title">
                     <h3>
-                        <p>Aplikasi Sistem Informasi Data Judul Karya Ilmiah merupakan aplikasi yang digunakan untuk menyimpan data dari karya karya yang dihasikan oleh mahasiswa PTIK, saat ini tersedia 3 kategori karya yang dapat dilihat Skripsi, PPL, Praktik Industri</p>
+                        <p>Sistem Informasi Data Judul Karya Ilmiah (SIDAKI) dikembangkan guna selain memenuhi penugasan dari mata kuliah pemrograman berbasis framework, juga diharapkan dapat digunakan dalam proses pengarsipan data karya ilmiah. </p>
                     </h3>
                 </div>
             </div>

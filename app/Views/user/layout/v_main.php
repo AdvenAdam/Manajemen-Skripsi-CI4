@@ -109,6 +109,29 @@
             });
         });
     </script>
+    <!-- alert fade out -->
+    <script>
+        window.setTimeout(function() {
+            $(".alert").fadeTo(500, 0).slideUp(500, function() {
+                $(this).remove();
+            })
+        }, 3000);
+    </script>
+
+    <!-- imagepreview -->
+    <script>
+        function previewImg() {
+            const foto = document.querySelector('#foto');
+            const fotoLabel = document.querySelector('.custom-file-label');
+            const imgPreview = document.querySelector('.img-preview');
+            fotoLabel.textContent = foto.files[0].name;
+            const filefoto = new FileReader();
+            filefoto.readAsDataURL(foto.files[0]);
+            filefoto.onload = function(e) {
+                imgPreview.src = e.target.result;
+            }
+        }
+    </script>
     <?= $this->renderSection('source'); ?>
 </body>
 

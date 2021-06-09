@@ -20,7 +20,7 @@
                     <a class="nav-link profile-dropdown" href="#" id="profileDropDown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <img src="/image/foto/<?= user()->user_image; ?>" style="width: 40px; height: 40px; object-fit: cover; object-position: center;" class="rounded-circle" alt=""></a>
                     <div class="dropdown-menu dropdown-menu-end profile-drop-menu" aria-labelledby="profileDropDown">
-                        <a class="dropdown-item" href="/Admin/User/edit/<?= user()->id; ?>"><i data-feather="user"></i>Profile</a>
+                        <a class="dropdown-item" href="/Admin/profile"><i data-feather="user"></i>Profile</a>
                         <a class="dropdown-item" href="/logout"><i data-feather="log-out"></i>Logout</a>
                     </div>
                 </li>

@@ -26,7 +26,7 @@
             User
         </li>
         <li class="<?= $active == 'profil' ? 'active-page' : ''; ?>">
-            <a href="/Admin/User/edit/<?= session()->user_id; ?>"><i data-feather="user"></i>Profil</a>
+            <a href="/Admin/Profile"><i data-feather="user"></i>Profil</a>
         </li>
         <li>
             <a href="/logout"><i data-feather="log-out"></i>Logout</a>

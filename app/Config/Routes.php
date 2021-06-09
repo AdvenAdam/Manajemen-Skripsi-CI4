@@ -49,11 +49,19 @@ $routes->group('Transaksi', ['filter' => 'role:member'], function ($routes) {
 $routes->group('Keranjang', ['filter' => 'role:member'], function ($routes) {
 	$routes->get('/', 'Member\KeranjangController::index');
 });
+$routes->group('Profile', ['filter' => 'role:member'], function ($routes) {
+	$routes->get('/', 'Member\ProfileController::index');
+	$routes->post('update/(:num)', 'Member\ProfileController::update/$1');
+});
 
 
 $routes->group('Admin', ['filter' => 'role:superadmin,admin'], function ($routes) {
 	$routes->get('/', 'Admin\Dashboard::index');
 	$routes->post('/', 'Admin\Dashboard::index');
+
+	$routes->post('Profile/update/(:num)', 'Admin\ProfileController::update/$1');
+	$routes->get('Profile', 'Admin\ProfileController::index');
+
 	//user manajemen
 	$routes->group('UserManage', ['filter' => 'role:superadmin'], function ($routes) {
 		$routes->get('/', 'Admin\UserController::index');
