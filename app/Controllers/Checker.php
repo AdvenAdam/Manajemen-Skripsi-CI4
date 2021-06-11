@@ -22,7 +22,7 @@ class Checker extends BaseController
 		$denda_perhari  = 5000;
 		foreach ($data as $list) {
 			$tgl_pinjam = new DateTime($list['tanggal_pinjam']);
-			$bts_pinjam = $tgl_pinjam->modify("+5 days")->format('Y-m-d');
+			$bts_pinjam = $tgl_pinjam->modify("+3 days")->format('Y-m-d');
 			$bts_pinjam = strtotime($bts_pinjam);
 			$tgl_kembali = strtotime($list['tanggal_kembali']);
 			$beda = $tgl_kembali - $bts_pinjam;
